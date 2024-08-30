@@ -38,6 +38,7 @@ def compute_stats(
         ohlc_data: pd.DataFrame,
         strategy_instance: 'Strategy',
         risk_free_rate: float = 0,
+        margin_calls: int = 0,
 ) -> pd.Series:
     assert -1 < risk_free_rate < 1
 
@@ -144,7 +145,7 @@ def compute_stats(
     s.loc['_strategy'] = strategy_instance
     s.loc['_equity_curve'] = equity_df
     s.loc['_trades'] = trades_df
-
+    s.loc['margin calls'] = margin_calls
     s = _Stats(s)
     return s
 

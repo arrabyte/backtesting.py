@@ -718,6 +718,7 @@ class _Broker:
         self.trades: List[Trade] = []
         self.position = Position(self)
         self.closed_trades: List[Trade] = []
+        self.margin_calls = 0
 
     def __repr__(self):
         return f'<Broker: {self._cash:.0f}{self.position.pl:+.1f} ({len(self.trades)} trades)>'
@@ -1238,6 +1239,7 @@ class Backtest:
                 ohlc_data=self._data,
                 risk_free_rate=0.0,
                 strategy_instance=strategy,
+                margin_calls=broker.margin_calls,
             )
 
         return self._results
